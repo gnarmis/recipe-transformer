@@ -4,11 +4,11 @@
 
 
 
-(def recipe {:ingredients [], :steps []})
+;(def recipe {:ingredients [], :steps []})
 
-(def ingreds-eg ["mushrooms", "flour", "ground beef"])
+;(def ingreds-eg ["mushrooms", "flour", "ground beef"])
 
-(def steps-eg ["", ""])
+;(def steps-eg ["", ""])
 
 (config/app-keys :yummly)
 
