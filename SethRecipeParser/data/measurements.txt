@@ -1,0 +1,44 @@
+tablespoon
+tablespoons
+tbsp
+teaspoon
+teaspoons
+tsp
+cup
+cups
+c
+fluid ounce
+fluid ounces
+fl oz
+ounce
+ounces
+oz
+pint
+pints
+pt
+quart
+quarts
+qt
+gallon
+gallons
+gal
+liter
+liters
+milliliter
+milliliters
+ml
+cubic centimeter
+cubic centimeters
+cc
+gram
+grams
+g
+pound
+pounds
+lb
+dash
+clove
+cloves
+head
+heads
+leaves
