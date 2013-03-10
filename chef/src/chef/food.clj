@@ -36,7 +36,8 @@
                             :AZ :gram-weight-2-description})))
 
 
-(second (read-spreadsheet (usda-SR25-data)))
+;(second (read-spreadsheet (usda-SR25-data)))
+
 
 (defn nutritional-value [nutrient-value gram-weight]
   "USDA-specified way to calculating nutritional value.
