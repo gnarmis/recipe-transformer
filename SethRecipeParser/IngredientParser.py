@@ -18,11 +18,6 @@ class Ingredient:
 		self.prep = prep
 		self.full_sentence = full_sentence
 
-@app.route('/')
-def index():
-    return food_dict[0]
-
-
 @app.route('/IngredientParser/<ingredient_sentence>')
 def classifyIngredient(ingredient_sentence):
 	ingredient_sentence = base64.b64decode(ingredient_sentence)
