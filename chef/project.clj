@@ -7,5 +7,5 @@
                  [clj-http "0.6.4"]
                  [dk.ative/docjure "1.6.0"]
                  [org.clojure/java.jdbc "0.2.3"]
-                 [org.xerial/sqlite-jdbc "3.7.2"]]
+                 [mysql/mysql-connector-java "5.1.6"]]
   :resource-paths ["src/chef/resource"])

@@ -3,12 +3,47 @@
             [chef.config :as config]
             [dk.ative.docjure.spreadsheet :as doc]
             [clojure.java.io :as io]
-            [clojure.string :as s]))
+            [clojure.string :as s])
+  (:use [clojure.java.jdbc]))
 
+; USDA FNDDS 5.0 Data
+; Reference: http://www.ars.usda.gov/Services/docs.htm?docid=22370
+
+(def db-config
+  {:db-host "localhost"
+   :db-port 3306
+   :db-name "FNDDS5"})
+ 
+(def fndds5-db
+  "Definition of the FNDDS5 database. Create a local database with these 
+  values, using included dump of FNDDS5. Find out more at
+  [this link](http://www.ars.usda.gov/Services/docs.htm?docid=22370)."
+  {:classname "com.mysql.jdbc.Driver" ; must be in classpath
+   :subprotocol "mysql"
+   :subname (str "//" (:db-host db-config)
+                 ":" (:db-port db-config) 
+                 "/" (:db-name db-config))
+   ; Any additional keys are passed to the driver
+   ; as driver-specific properties.
+   :user "chef"
+   :password "chef"})
+
+(defn query [s db]
+  "Run a query with `s` being the SQL query against the database `db`"
+  (with-connection db
+    (with-query-results rs [s]
+      (doall rs))))
+
+;(query "select count(*) from AddFoodDesc" fndds5-db)
+
+
+; USDA SR25 Data
+; Reference: http://www.ars.usda.gov/Services/docs.htm?docid=22771)
 
 (defn usda-SR25-data []
   "Returns the file containing the USDA SR25 2012 abbreviated spreadsheet.
-  Find out more at [this link](http://www.ars.usda.gov/Services/docs.htm?docid=22771)"
+  Find out more at 
+  [this link](http://www.ars.usda.gov/Services/docs.htm?docid=22771)"
   (s/replace (.getPath (io/resource "usda-SR25-abbrev.xlsx"))
              #"%20"
              " "))
@@ -37,6 +72,7 @@
 
 
 ;(second (read-spreadsheet (usda-SR25-data)))
+
 
 
 (defn nutritional-value [nutrient-value gram-weight]
