@@ -6,27 +6,33 @@
             [clojure.string :as s])
   (:use [clojure.java.jdbc]))
 
+
 ; USDA FNDDS 5.0 Data
 ; Reference: http://www.ars.usda.gov/Services/docs.htm?docid=22370
 
-(def db-config
-  {:db-host "localhost"
-   :db-port 3306
-   :db-name "FNDDS5"})
- 
-(def fndds5-db
-  "Definition of the FNDDS5 database. Create a local database with these 
-  values, using included dump of FNDDS5. Find out more at
-  [this link](http://www.ars.usda.gov/Services/docs.htm?docid=22370)."
+; DB Definition...
+
+(defn db-with-config [db-config]
+  "Build db definition using given configuration."
   {:classname "com.mysql.jdbc.Driver" ; must be in classpath
    :subprotocol "mysql"
    :subname (str "//" (:db-host db-config)
                  ":" (:db-port db-config) 
                  "/" (:db-name db-config))
-   ; Any additional keys are passed to the driver
-   ; as driver-specific properties.
    :user "chef"
    :password "chef"})
+
+(def FNDDS5-db-config
+  {:db-host "localhost"
+   :db-port 3306
+   :db-name "FNDDS5"})
+ 
+(def FNDDS5-db
+  "Definition of the FNDDS5 database. Find out more at
+  [this link](http://www.ars.usda.gov/Services/docs.htm?docid=22370)."
+  (db-with-config FNDDS5-db-config))
+
+; DB Interaction...
 
 (defn query [s db]
   "Run a query with `s` being the SQL query against the database `db`"
@@ -35,6 +41,8 @@
       (doall rs))))
 
 ;(query "select count(*) from AddFoodDesc" fndds5-db)
+
+
 
 
 ; USDA SR25 Data
@@ -70,9 +78,17 @@
                             :AY :gram-weight-2
                             :AZ :gram-weight-2-description})))
 
-
 ;(second (read-spreadsheet (usda-SR25-data)))
 
+(def SR25-db-config
+  {:db-host "localhost"
+   :db-port 3306
+   :db-name "SR25"})
+
+(def SR25-db
+  "Definition of the SR25 database. Find out more at 
+  [this link](http://www.ars.usda.gov/Services/docs.htm?docid=22771)"
+  (db-with-config SR25-db-config))
 
 
 (defn nutritional-value [nutrient-value gram-weight]
@@ -86,4 +102,16 @@
 
 
 
+; Other DB Helpers
 
+(defn drop-database [name db]
+  (with-connection db
+    (with-open [s (.createStatement (connection))]
+      (.addBatch s (str "drop database " name))
+      (seq (.executeBatch s)))))
+
+(defn create-database [name db]
+  (with-connection db
+    (with-open [s (.createStatement (connection))]
+      (.addBatch s (str "create database " name))
+      (seq (.executeBatch s)))))
