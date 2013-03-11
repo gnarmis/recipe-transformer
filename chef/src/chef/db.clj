@@ -1,4 +1,5 @@
 (ns chef.db
+  "Defines chef's interaction with data."
   (:require [clj-http.client :as client]
             [chef.config     :as config]
             [dk.ative.docjure.spreadsheet :as doc]
@@ -9,8 +10,9 @@
 
 ; DB Definitions...
 
-(defn db-with-config [db-config]
+(defn db-with-config 
   "Build db definition using given configuration."
+  [db-config]
   {:classname "com.mysql.jdbc.Driver" ; must be in classpath
    :subprotocol "mysql"
    :subname (str "//" (:db-host db-config)
@@ -42,16 +44,18 @@
 
 ; some useful functions...
 
-(defn query [s db]
+(defn query
   "Run a query with `s` being the SQL query against the database `db`"
+  [s db]
   (sql/with-connection db
     (sql/with-query-results rs [s]
       (doall rs))))
 ;(query "select count(*) from AddFoodDesc" FNDDS5-db)
 
-(defn example-food-to-group-mapping []
+(defn example-food-to-group-mapping
   "This select statement produces tuples that contain both the food description
   and the food group."
+  []
   (query "select ABBREV.NDB_No, ABBREV.Shrt_Desc, FOOD_DES.NDB_No, FOOD_DES.FdGrp_Cd, FD_GROUP.FdGrp_CD, FD_GROUP.FdGrp_Desc
            from ABBREV
            join FOOD_DES on ABBREV.NDB_No = FOOD_DES.NDB_No
@@ -59,9 +63,10 @@
            limit 1" SR25-db))
 ;(example-food-to-group-mapping)
 
-(defn food-to-group [food-search-str]
-  "Given a food name regular expression, returns top 10 matches with just food description
+(defn food-to-group
+  "Given a food search string, returns top 10 matches with just food description
   and that food's group. Make sure FOOD_DES.Long_Desc has fulltext added; run add-fulltext as shown."
+  [food-search-str]
   (query (str "select FOOD_DES.Long_Desc, FD_GROUP.FdGrp_Desc
                  from ABBREV
                  join FOOD_DES on ABBREV.NDB_No = FOOD_DES.NDB_No
@@ -85,16 +90,18 @@
 
 ; Spreadsheet Reading
 
-(defn usda-SR25-data []
+(defn usda-SR25-data
   "Returns the file containing the USDA SR25 2012 abbreviated spreadsheet.
   Find out more at 
   [this link](http://www.ars.usda.gov/Services/docs.htm?docid=22771)"
+  []
   (s/replace (.getPath (io/resource "usda-SR25-abbrev.xlsx"))
              #"%20"
              " "))
 
-(defn read-spreadsheet [file]
+(defn read-spreadsheet
   "Read given spreadsheet file."
+  [file]
   (->> (doc/load-workbook file)
        (doc/select-sheet "Abbrev")
        (doc/select-columns {:B :food-description

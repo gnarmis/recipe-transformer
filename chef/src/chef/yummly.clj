@@ -3,7 +3,11 @@
             [chef.config :as config]))
 
 
-(defn yummly-api [auth]
+(defn yummly-api
+  "The yummly api described as a function. Produces a useful map of
+  keys and values and take an auth parameter to complete that map. Using this
+  map, you can do the usual API queries, and construct them easily."
+  [auth]
   {:endpoint 	"http://api.yummly.com/v1"
    :resources {:recipe-search "/api/recipes"}
    :params 		["q", "requirePictures", "allowedIngredient[]", "excludedIngredient[]",
@@ -32,8 +36,9 @@
                :flavor ["sweet", "meaty", "sour", "bitter", "sweet", "piquant"]}})
 
 
-(defn yummly-search [url-params api]
-  "Search yummly"
+(defn yummly-search
+  "Search yummly API for recipes"
+  [url-params api]
   (let [req (str (:endpoint api)
                  (-> api :resources :recipe-search)
                  "?"

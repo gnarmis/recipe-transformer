@@ -1,6 +1,6 @@
 (defproject chef "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "API for food"
+  :url "http://github.com/gnarmis/recipe-transformer"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.0"]
@@ -18,7 +18,8 @@
                                               javax.jms/jms
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]]
-  :dev-dependencies [[lein-ring "0.4.3"]]
+  :dev-dependencies [[lein-ring "0.4.3"]
+                     [codox "0.6.4"]]
   :resource-paths ["src/chef/resource"]
   :min-lein-version "2.0.0"
   :ring {:handler chef.food/app})
