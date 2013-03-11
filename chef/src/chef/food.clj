@@ -2,9 +2,38 @@
   (:require [chef.config :as config]
             [chef.db :as db]
             [clj-http.client :as client]
-            [clojure.string :as s]))
+            [clojure.string :as s]
+            [clojure.data.json :as json]
+            [compojure.handler :as handler]
+            [compojure.route :as route]
+            [noir.util.middleware :as nm])
+  (:use [compojure.core]
+        [ring.adapter.jetty]))
+
+(defn food-search [q]
+  "A function that returns a JSON response after doing a search
+  using the parameter `q`"
+  (try
+    {:status  200
+     :headers {"Content-Type" "application/json"}
+     :body    (json/write-str {:results (db/food-to-group q)})}
+    (catch Exception e
+      {:status  409
+       :headers {"Content-Type" "application/json"}
+       :body    (json/write-str {:error "Something went wrong"})})))
+
+(def app-routes
+  [(GET "/food/search/:q" [q] (food-search q))
+   (route/not-found "Chef.food")])
 
 
+(def app
+  (nm/app-handler app-routes))
+
+
+
+; Blah...
+          
 (defn nutritional-value [nutrient-value gram-weight]
   "USDA-specified way to calculating nutritional value.
   `nutrient-value` should be per 100g (Nutr_Val in the [Nutrient Data file](1)),

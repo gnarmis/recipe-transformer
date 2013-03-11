@@ -59,7 +59,29 @@
            limit 1" SR25-db))
 ;(example-food-to-group-mapping)
 
+(defn food-to-group [food-search-str]
+  "Given a food name regular expression, returns top 10 matches with just food description
+  and that food's group. Make sure FOOD_DES.Long_Desc has fulltext added; run add-fulltext as shown."
+  (query (str "select FOOD_DES.Long_Desc, FD_GROUP.FdGrp_Desc
+                 from ABBREV
+                 join FOOD_DES on ABBREV.NDB_No = FOOD_DES.NDB_No
+                 join FD_GROUP on FOOD_DES.FdGrp_Cd = FD_GROUP.FdGrp_CD
+                 where MATCH(FOOD_DES.Long_Desc) AGAINST ('"
+                 food-search-str
+                 "')") SR25-db))
 
+;(food-to-group "blue cheese")
+
+
+(defn add-fulltext [db table-name field-name]
+  (sql/with-connection db
+   (sql/do-commands (str "ALTER TABLE "
+                         table-name
+                         " "
+                         "ADD FULLTEXT("
+                         field-name
+                         ")"))))
+;(add-fulltext SR25-db "FOOD_DES" "Long_Desc")
 
 ; Spreadsheet Reading
 
