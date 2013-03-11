@@ -64,7 +64,7 @@
 ;(example-food-to-group-mapping)
 
 (defn food-to-group
-  "Given a food search string, returns top 10 matches with just food description
+  "Given a food search string, returns top matches with just food description
   and that food's group. Make sure FOOD_DES.Long_Desc has fulltext added; run add-fulltext as shown."
   [food-search-str]
   (query (str "select FOOD_DES.Long_Desc, FD_GROUP.FdGrp_Desc
