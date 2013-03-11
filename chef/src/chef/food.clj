@@ -6,9 +6,9 @@
             [clojure.data.json :as json]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [noir.util.middleware :as nm])
-  (:use [compojure.core]
-        [ring.adapter.jetty]))
+            [noir.util.middleware :as nm]
+            [ring.util.codec :as codec])
+  (:use [compojure.core]))
 
 (defn food-search [q]
   "A function that returns a JSON response after doing a search
@@ -16,7 +16,7 @@
   (try
     {:status  200
      :headers {"Content-Type" "application/json"}
-     :body    (json/write-str {:results (db/food-to-group q)})}
+     :body    (json/write-str {:results (db/food-to-group (codec/url-decode q))})}
     (catch Exception e
       {:status  409
        :headers {"Content-Type" "application/json"}
