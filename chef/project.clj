@@ -7,5 +7,10 @@
                  [clj-http "0.6.4"]
                  [dk.ative/docjure "1.6.0"]
                  [org.clojure/java.jdbc "0.2.3"]
-                 [mysql/mysql-connector-java "5.1.6"]]
+                 [mysql/mysql-connector-java "5.1.6"]
+                 [korma "0.3.0-RC4"]
+                 [log4j "1.2.15" :exclusions [javax.mail/mail
+                                              javax.jms/jms
+                                              com.sun.jdmk/jmxtools
+                                              com.sun.jmx/jmxri]]]
   :resource-paths ["src/chef/resource"])
