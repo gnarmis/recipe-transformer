@@ -18,8 +18,8 @@
                                               javax.jms/jms
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]]
-  :dev-dependencies [[lein-ring "0.4.3"]
-                     [codox "0.6.4"]]
+  :plugins [[lein-ring "0.8.3"]]
+  :dev-dependencies [[codox "0.6.4"]]
   :resource-paths ["src/chef/resource"]
   :min-lein-version "2.0.0"
   :ring {:handler chef.food/app})
