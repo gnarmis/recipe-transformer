@@ -5,10 +5,7 @@ import base64
 from nltk.corpus import brown
 from cPickle import load
 from nltk.tag import brill
-from flask import Flask
-from flask import jsonify
-app = Flask(__name__)
-
+import json
 
 class Ingredient:
 	def __init__(self,number,measurement,food,prep,full_sentence):
@@ -18,10 +15,10 @@ class Ingredient:
 		self.prep = prep
 		self.full_sentence = full_sentence
 
-@app.route('/IngredientParser/<ingredient_sentence>')
 def classifyIngredient(ingredient_sentence):
-	ingredient_sentence = base64.b64decode(ingredient_sentence)
-	ingredient_sentence = ingredient_sentence.decode('utf-8')
+	ingredient_sentence = ingredient_sentence.lower()
+	for c in string.punctuation:
+		ingredient_sentence = ingredient_sentence.replace(c,'')
 	
 	tokens = nltk.word_tokenize(ingredient_sentence)
 
@@ -68,7 +65,8 @@ def classifyIngredient(ingredient_sentence):
 		numbers = spec_number
 
 	#return Ingredient(numbers[:-1],measurement[:-1],(food_adj+food),prep[:-1],ingredient_sentence[:-1])
-	return jsonify(number=numbers[:-1],measurement=measurement[:-1],name=(food_adj+food),prep=prep[:-1],full_sentence=ingredient_sentence[:-1])
+	data = {'number':numbers[:-1],'measurement':measurement[:-1],'adj':food_adj,'name':food,'prep':prep[:-1],'full_sentence':ingredient_sentence[:-1]}
+	return json.dumps(data)
 
 input = open('t0.pkl','rb') #load default tagger
 t0 = load(input)
@@ -141,8 +139,6 @@ for line in file:
 ########
 
 
-if __name__ == '__main__':
-	app.run(debug=True)
 
 '''
 sentence = '3 1/2 cups peeled and diced potatoes';	
@@ -158,7 +154,10 @@ for ingredient in test_ingredients:
 		ingredient = ingredient.replace(c,'')
 
 	classified_ingr = classifyIngredient(ingredient, food_dict,t2)
-	print 'NUM',classified_ingr.number,'MEA',classified_ingr.measurement,'FOOD',classified_ingr.food,'PREP',classified_ingr.prep
+	print '
+	
+	if __name__ == '__main__':
+	app.run(debug=True,port=5000)',classified_ingr.number,'MEA',classified_ingr.measurement,'FOOD',classified_ingr.food,'PREP',classified_ingr.prep
 	print
 
 '''

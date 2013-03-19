@@ -2,23 +2,18 @@ import nltk
 import string
 import base64
 import re
-from flask import Flask
-from flask import jsonify
+import json
 from cPickle import load
 
-app = Flask(__name__)
 
 input = open('t0.pkl','rb') #load default tagger
 t0 = load(input)
 input.close()
 
-
-@app.route('/RecipeStepParser/<step_string>')
 def parseRecipeStepList(step_string):
 	steps = []
 	
-	step_string = base64.b64decode(step_string)
-	step_string = step_string.decode('utf-8').lower()
+	step_string = step_string.lower()
 	step_tokens = nltk.word_tokenize(step_string)
 
 	readyForNewStep = False
@@ -48,7 +43,7 @@ def parseRecipeStepList(step_string):
 
 	steps.append(step_string)
 
-	return jsonify(steps=steps)
+	return json.dumps({'steps':steps})
 
 def addSpaceOrNot(word, step_string):
 	if word in string.punctuation or (len(step_string) > 0 and step_string[-1] == '('):
@@ -56,5 +51,3 @@ def addSpaceOrNot(word, step_string):
 	else:
 		return ' ' + word
 
-if __name__ == '__main__':
-	app.run(debug=True)

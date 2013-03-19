@@ -6,21 +6,21 @@ ackee
 acorn squash
 adobo
 advieh
-African birdseye chile pepper
+african birdseye chile pepper
 agar
 aioli
-Ajowan
+ajowan
 al dente
 ale
 aleppo pepper
 alfalfa sprout
 alfredo sauce
-Alitame
+alitame
 alize liqueur
 alligator
 allspice
 almond
-Almond Bark
+almond bark
 almond butter
 almond extract
 almond paste
@@ -87,6 +87,7 @@ banger
 bannock
 banon cheese
 barbecue sauce
+barbeque sauce
 barberry
 bard
 barley
@@ -131,8 +132,8 @@ blueberry
 boerewor
 boil
 bok choy
-Bombay duck
-Bon Appetit seasoning
+bombay duck
+con appetit seasoning
 borage
 borscht
 bottarga
@@ -145,6 +146,7 @@ braise
 brandy
 brazil nuts
 breadcrumb
+bread crumb
 breadfruit
 bresaola
 brewer's yeast
@@ -170,20 +172,19 @@ butternut squash
 cabbage
 cachaca
 cactus
-Caerphilly
+caerphilly
 calabaza
 callaloo
-Calvados
+calvados
 campden tablet
-Canadian bacon
-Candy Making Temperature
+canadian bacon
 candy thermometer
 cannellini bean
 canola oil
 cantaloupe
 cape gooseberry
 capers
-Cappuccino Latte
+cappuccino latte
 capsicum
 carambola
 caramelize
@@ -195,7 +196,7 @@ carrageen
 carrots
 cashew nut
 cassava
-Casserole
+casserole
 catfish
 caul
 cauliflower
@@ -206,7 +207,7 @@ celery
 celery seed
 chai
 chambord
-Champagne yeast
+champagne yeast
 chard
 chaurice sausage
 chayote
@@ -217,7 +218,7 @@ chendol
 cherimoya
 cherries
 chervil
-Cheshire cheese
+cheshire cheese
 chestnut
 chicken
 chicken liver
@@ -227,8 +228,8 @@ chiffonade
 chile pepper
 chili powder
 chili sauce
-Chinese Cabbage
-Chinese date
+chinese cabbage
+chinese date
 chipotle pepper
 chives
 chocolate
@@ -239,12 +240,11 @@ cider vinegar
 cilantro
 cinnamon
 citron
-Citrus oil
+citrus oil
 clafouti
 clams
 clarified butter
 clarify
-cloves
 cocoa powder
 coconuts
 coconut milk or cream
@@ -252,18 +252,18 @@ coconut oil
 cod
 coffee
 colby
-Common Container Size
 confit
 cookie
-Cool Whip
-Copha
+cool whip
+copha
 coriander
 corn
 corn flour
 corn syrup
 corned beef
 cornichons
-Cornish Yarg cheese
+cornish yarg
+cornish yarg cheese
 cornmeal
 cornstarch
 cottage cheese
@@ -287,7 +287,7 @@ creme de cassis
 creme de menthe
 creme fraiche
 cremini mushroom
-Creole sausage
+creole sausage
 crock pot
 crostini
 crouton
@@ -307,12 +307,12 @@ date
 date sugar
 deglaze
 demi-glace
-Derby cheese
+derby cheese
 desiccated
 desserts
 dhania-jeera powder
 dill
-Dovedale cheese
+dovedale cheese
 dragees
 dredge
 dried leek
@@ -322,22 +322,22 @@ dumpling
 durian
 dutch oven
 eau de vie
-eclairs
+eclair
 edam
 edamame
-eels
-eggs
+eel
+egg
 egg substitute
 eggplant
-Elderberrie
+elderberrie
 endive
-English muffin
-English mustard
+english muffin
+english mustard
 epazote
 erythritol
 escalope
 falafel
-Falernum
+falernum
 farina
 farmer cheese
 fava bean
@@ -363,11 +363,11 @@ focaccia
 foie gras
 fold
 fond
-Fontina Cheese
+fontina cheese
 forcemeat
 frangipane
 french fry
-French-style green bean
+french-style green bean
 fried rice seasoning
 frisee
 fructose
@@ -385,10 +385,10 @@ ginger beer
 ginger syrup
 ginkgo nut
 glace de viande
-Gloucester
+gloucester
 gluten
 gluten-free brand name
-Goji berry
+goji berry
 golden syrup
 goose
 gooseberry
@@ -397,7 +397,7 @@ gouda
 graham cracker
 grains of paradise
 gram flour
-Grand Marnier
+grand marnier
 granola
 grapes
 grapefruit
@@ -409,7 +409,7 @@ green onion
 greens
 grits
 grouper
-Gruyere
+gruyere
 guanbana
 guavas
 gumbo
@@ -421,21 +421,18 @@ ham
 ham hock
 hamburger
 hard cheese
-Harissa
+harissa
 hash brown
-Havarti
-Hawaij
+havarti
+hawaij
 hazelnuts
 hearts of palm
 heavy cream
-Heirloom Weights & Measurements
 herb
 herbsaint
 herring
-High Altitude Adjustment for Cookie
-High Altitude Adjustment for Deep Fat Frying
-High Altitude Baking Quick Bread
-Hispanic cheese
+high altitude baking quick bread
+hispanic cheese
 hoisin sauce
 hoja santa
 hoki
@@ -446,22 +443,22 @@ horseradish
 hot sauce
 huckleberries
 hundred-year egg
-Hungarian wax chile
+hungarian wax chile
 hyssop
-I Can't Believe It's Not Butter
+i can't believe it's not butter
 ice cream
 ice wine
 icing sugar
-Indian pudding
+indian pudding
 indienne, à l'
 infusion
 insalata
 instant espresso
 instant potato flake
 invert sugar
-Irish coffee
-Irish cream liqueur
-Irish mist
+irish coffee
+irish cream liqueur
+irish mist
 isinglass
 jack cheese
 jaggery
@@ -471,13 +468,13 @@ jamun
 jelly beans
 jelly roll
 jelly tots
-Jerusalem artichoke
+jerusalem artichoke
 jicama
 joint
 jowl
-Kabsa Spice Mix
+kabsa spice mix
 kaffir lime
-Kahlua
+kahlua
 kalamata olive
 kale
 kamaboko
@@ -487,11 +484,11 @@ ketchup
 ketjap manis
 kewra essence
 kewra water
-Khus Essence
+khus essence
 kidney bean
 kielbasa
 kirsch
-Kitchen Bouquet
+kitchen bouquet
 kiwi fruit
 kohlrabi
 konfyt
@@ -499,25 +496,24 @@ kosher
 kudzu
 kugel
 kumquat
-lactose-free brand name
 ladyfinger
 lamb
-Lambsquarter
-Lamprey
-Lancashire cheese
+lambsquarter
+lamprey
+lancashire cheese
 lardon
 lavender
 lecithin
 leeks
-Lefse
+lefse
 lemon
 lemon balm
 lemon grass
 lemon juice
-Lemon Peel
+lemon peel
 lentils
 lettuce
-Li Hing Mui
+li hing mui
 liaison
 light cream
 lima bean
@@ -534,12 +530,12 @@ lumpia wrapper
 macaroni
 mace
 mackerel
-Madeira
+madeira
 mahi mahi
 mahleb
 malt vinegar
-Malta
-Mandarin orange
+malta
+mandarin orange
 mange-tout
 mangoes
 mangosteen
@@ -549,7 +545,7 @@ maraschino cherry
 margarine
 marjoram
 marmalade
-Marsala
+marsala
 marshmallow
 marula
 marzipan
@@ -559,7 +555,6 @@ mascarpone
 matignon
 matzo meal
 mayonnaise
-Meat: Safe Cooking Temperature
 melons
 meringue powder
 mesclun
@@ -568,40 +563,39 @@ milk
 mimolette cheese
 mince
 mint
-Miracle Whip dressing
+miracle whip
 mirepoix
 miso
 mixed spice
 mizuna
-Moambé Sauce
+moambé sauce
 molasses
 monkfish
 monosodium glutamate
 moo shu wrappers
 morels
-Moreton Bay Bug
+moreton bay bug
 mortadella
 mostaccioli
 mozzarella
-Mrs Dash's Fiesta Lime Salt-Free Seasoning
+mrs dash's fiesta lime salt-free seasoning
 muddle
 mugwort
 mung beans
-Muscadine grape
+muscadine grape
 muscovado sugar
-Muscovy duck
+muscovy duck
 mushroom
 muskmelon
 mussels
-mustard, prepared
+mustard
 nasturtium
 navy bean
 nectarine
 nigella seed
 nopales
 nori
-O'Brien potato
-OAMC
+o'brien potato
 oatmeal
 octopus
 offal
@@ -612,10 +606,9 @@ onion
 onion powder
 orange
 orange flower water
-Orange Peel
+orange Peel
 oregano
 orgeat syrup
-Oven Temperature
 oyster sauce
 Palm oil
 palm sugar
@@ -642,11 +635,11 @@ peanut
 peanut butter
 pear
 pecan
-Pelargonium citronellum
-Peppadew pepper
+pelargonium citronellum
+peppadew pepper
 pepper
 perch
-Periwinkle
+periwinkle
 persimmon
 pesto
 pheasant
@@ -678,7 +671,7 @@ polenta
 pomegranate
 pomegranate molasses
 pomelos
-Pomona's Universal Pectin
+pomona's universal pectin
 pompano
 ponzu
 poppy seed
@@ -697,7 +690,7 @@ preserves
 preserved lemon
 processed cheese
 proof
-Prosciuttini
+prosciuttini
 prosciutto
 provolone
 prunes
@@ -706,7 +699,7 @@ puff pastry
 pulses
 pumpkins
 pumpkin pie spice
-Pumpkin seed
+pumpkin seed
 quail
 quark
 quenelle
@@ -730,7 +723,7 @@ recaito
 red beans
 red cabbage
 red chile powder
-Red Leicester
+red Leicester
 red pepper flake
 red snapper
 remoulade
@@ -744,12 +737,12 @@ rice vinegar
 rice wine
 ricotta cheese
 romaine lettuce
-Romano cheese
-Rookworst
+romano cheese
+rookworst
 rose essense
 rose water
 rosemary
-Rotel tomato
+rotel tomato
 rotisserie
 roux
 rum
@@ -769,7 +762,7 @@ sandwich
 sardine
 satay
 sauerkraut
-Saunf
+saunf
 sausage
 saute
 savory
@@ -777,8 +770,8 @@ sazon
 scald
 scallop
 scaloppine
-Scotch bonnet chile
-Scoville Chart
+scotch bonnet chile
+scoville Chart
 scrapple
 screwpine leaf
 sea cucumber
@@ -796,9 +789,9 @@ shitakes
 shortening
 shrimp
 shrimp paste
-Shropshire Blue
+shropshire blue
 simmer
-Slipper Lobster
+slipper lobster
 smelt
 smoke seasoning
 smoked salmon
@@ -823,7 +816,7 @@ soybean
 soymilk
 spaetzle
 spaghetti squash
-Spanish cheese
+spanish cheese
 spatchcock
 spearmint
 specialty cheese
@@ -855,7 +848,7 @@ sweetbreads
 sweetened condensed milk
 swiss cheese
 swordfish
-Szechuan peppercorn
+szechuan peppercorn
 Tabasco sauce
 tagine
 tahini
@@ -939,7 +932,7 @@ wine
 wine vinegar
 won ton skin
 woodruff
-Worcestershire sauce
+worcestershire sauce
 yabby
 yeast
 yogurt

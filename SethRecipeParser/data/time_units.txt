@@ -1,0 +1,4 @@
+seconds
+minutes
+hours
+days
