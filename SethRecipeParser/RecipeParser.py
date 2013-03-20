@@ -1,6 +1,5 @@
 import nltk
 import string
-import base64
 import re
 from flask import Flask
 from flask import jsonify
@@ -11,6 +10,7 @@ import json
 import Pluralize
 import IngredientParser
 import StepParser
+from helpers import *
 
 RecipeParser = Flask(__name__)
 
@@ -64,10 +64,12 @@ def placeSymbol(step_sentence,ingredients):
 	return step_sentence
 
 
-@RecipeParser.route('/RecipeParser/<ingredients>/<steps>')
-def parseCompiler(ingredients,steps):
+@RecipeParser.route('/RecipeParser/<path:steps_and_ingredients>', methods=['GET'])
+def parseCompiler(steps_and_ingredients):
 	
-	ingredients = base64.b64decode(ingredients).decode('utf-8')
+	combined_dict = safe_decode(steps_and_ingredients)
+
+	ingredients = combined_dict['ingredients']
 	ingredient_list = ingredients.split('\n')
 
 	parsed_ingredients = []
@@ -77,7 +79,7 @@ def parseCompiler(ingredients,steps):
 		#print content
 		parsed_ingredients.append(content)
 	
-	steps = base64.b64decode(steps).decode('utf-8')
+	steps = combined_dict['steps']
 	parsed_steps = StepParser.parseRecipeStepList(steps)
 	#at this point, our inputs have been parsed by their respective parsers
 	

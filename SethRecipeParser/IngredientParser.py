@@ -1,7 +1,7 @@
 import nltk
 import string
 import Pluralize
-import base64
+import urllib
 from nltk.corpus import brown
 from cPickle import load
 from nltk.tag import brill
@@ -132,10 +132,10 @@ for line in file:
 #######
 
 #load test cases#
-file =open('data/test_cases.txt')
-test_ingredients=[]
-for line in file:
-	test_ingredients.append(line)
+# file =open('data/test_cases.txt')
+# test_ingredients=[]
+# for line in file:
+# 	test_ingredients.append(line)
 ########
 
 

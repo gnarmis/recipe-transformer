@@ -1,6 +1,5 @@
 import nltk
 import string
-import base64
 import re
 import json
 from cPickle import load

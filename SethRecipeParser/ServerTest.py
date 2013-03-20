@@ -1,5 +1,5 @@
 import urllib2
-import base64
+from helpers import *
 import StepParser
 import IngredientParser
 
@@ -18,8 +18,9 @@ step_string = '1.	Preheat oven to 375 degrees F (190 degrees C). Grease a 9x11-i
 
 #print StepParser.parseRecipeStepList(step_string)
 
+combined_args = {'ingredients': ingredients_string, 'steps': step_string}
 
-parsed_ingredients =  urllib2.urlopen("http://localhost:5000/RecipeParser/"+base64.b64encode(ingredients_string)+"/"+base64.b64encode(step_string)).read()
+parsed_ingredients = urllib2.urlopen("http://localhost:5000/RecipeParser/"+safe_encode(combined_args)).read()
 
 print parsed_ingredients
 
