@@ -21,36 +21,36 @@ The parser is called RecipeParser. If you navigate to the `SethRecipeParser` fol
 
 - `<input>` = a url-encoded JSON map that should look like:
     ```json
-    {'ingredients': <ingredient string>,
-     'steps': <steps string>}
+    {"ingredients": <ingredient-string>,
+     "steps": <steps-string>}
     ```
   Example code in python: `urllib.encode(json.dumps(input_dict))`, `json.loads(urllib.decode(param))`
 
 Note that for the ingredient and steps lists, the parser assumes that there is a new-line character in-between each ingredient (fairly common in such lists). 
 
 - Output:
-    ```json
-    {"steps":[
-         {
-          "step":"Place %INGR0% in the oven for 10 to 12 minutes",
-           "timeString": {
-               "seconds": "0", 
-               "hours": "0", 
-               "minutes": "10"
-            }
-          },
-          ...more steps
-                  ],
-    "ingredients": [
-        {
-          "full_sentence": "5 slices bacon", 
-          "name": "bacons", 
-          "number": "5", 
-          "measurement": "", 
-          "adj": "", 
-          "prep": "slices"
-        }, 
-        ..more ingredients
-     ]
-    }
-    ```
+```json
+{"steps":[
+     {
+      "step":"Place %INGR0% in the oven for 10 to 12 minutes",
+       "timeString": {
+           "seconds": "0", 
+           "hours": "0", 
+           "minutes": "10"
+        }
+      },
+      ...more steps
+              ],
+"ingredients": [
+    {
+      "full_sentence": "5 slices bacon", 
+      "name": "bacons", 
+      "number": "5", 
+      "measurement": "", 
+      "adj": "", 
+      "prep": "slices"
+    }, 
+    ..more ingredients
+ ]
+}
+```
