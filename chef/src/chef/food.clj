@@ -11,23 +11,40 @@
             [ring.util.codec :as codec])
   (:use [compojure.core]))
 
+
+(defn wrap-response
+  "Helper for wrapping responses for Ring"
+  [content status] {:status status
+                    :headers {"Content-Type" "application/json"}
+                    :body content})
+
 (defn food-search
-  "A function that returns a JSON response after doing a search
-  using the parameter `q`"
+  "Returns foods matching the name given by param `q`."
   [q]
   (try
-    {:status  200
-     :headers {"Content-Type" "application/json"}
-     :body    (json/write-str {:results (db/food-search-query (codec/url-decode q))})}
+    (wrap-response (json/write-str {:results (db/food-search-query (codec/url-decode q))})
+                   202)
     (catch Exception e
-      {:status  409
-       :headers {"Content-Type" "application/json"}
-       :body    (json/write-str {:error "Something went wrong"})})))
+      (wrap-response (json/write-str {:error "Something went wrong"})
+                     409))))
+
+(defn food-group-search
+  "Returns foods in given group, sorted ASC by total calories."
+  [q]
+  (try
+    (wrap-response (json/write-str {:results (db/health-candidates-query (codec/url-decode q))})
+                   202)
+    (catch Exception e
+      (wrap-response (json/write-str {:error "Something went wrong"
+                                      :exception (str e)})
+                     409))))
+
 
 (def app-routes
   "Vector of forms that define how the routes of the app behave."
   [(GET "/food/:q" [q] (food-search q))
-   (route/not-found "Chef Endpoints: GET /food/:q")])
+   (GET "/food-group/:q" [q] (food-group-search q))
+   (route/not-found "Chef Endpoints: GET /food/:q, GET /food-group/:q")])
 
 
 (def app

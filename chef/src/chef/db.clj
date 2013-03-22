@@ -70,15 +70,15 @@
   "Given a food search string, returns top matches with just food description
   and that food's group. Make sure FOOD_DES.Long_Desc has fulltext added; run add-fulltext as shown."
   [food-search-str]
-  (process-food-query
-   (query (str "select *
-               from ABBREV
-               join FOOD_DES on ABBREV.NDB_No = FOOD_DES.NDB_No
-               join FD_GROUP on FOOD_DES.FdGrp_Cd = FD_GROUP.FdGrp_CD
-               where MATCH(FOOD_DES.Long_Desc) AGAINST ('"
-               food-search-str
-               "')")
-          SR25-db)))
+  (->> (query (str "select *
+                   from ABBREV
+                   join FOOD_DES on ABBREV.NDB_No = FOOD_DES.NDB_No
+                   join FD_GROUP on FOOD_DES.FdGrp_Cd = FD_GROUP.FdGrp_CD
+                   where MATCH(FOOD_DES.Long_Desc) AGAINST ('"
+                   food-search-str
+                   "')")
+              SR25-db)
+       (process-food-query)))
 
 (defn process-food-query
   "Organize and clean food query."
@@ -103,7 +103,26 @@
                              (keyword "quantity-weight_(g)") ((keyword "gmwt_2") r)}]
                  }}))
 
-(food-search-query "onions")
+;(food-search-query "onions")
+
+
+(defn health-candidates-query
+  "Given a food group string, return list of member foods, sorted ASC by number of calories"
+  [q]
+  (->> (query (str "select *
+              from ABBREV
+              join FOOD_DES on ABBREV.NDB_No = FOOD_DES.NDB_No
+              join FD_GROUP on FOOD_DES.FdGrp_Cd = FD_GROUP.FdGrp_CD
+              where FD_GROUP.FdGrp_Desc like '"
+              q
+              "'
+              order by ABBREV.`Energ_Kcal` ASC
+              limit 10")
+              SR25-db)
+       process-food-query))
+
+
+
 
 
 (defn add-fulltext [db table-name field-name]
