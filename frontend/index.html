@@ -22,7 +22,7 @@
 				this.unTransformedJSON = {
 					  "steps": [
 					    {
-					      "step": "test1 bring a large pot of", 
+					      "step": "test1 bring a large pot of test1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot oftest1 bring a large pot of", 
 					      "timeString": {
 					        "seconds": "0", 
 					        "hours": "0", 
@@ -321,8 +321,9 @@
 						currentStep--;
 						showTimer();
 						var parsedStr = parseingredientstr(steps[currentStep].step);
-						$("#step").text(parsedStr);
+						$("#stepSpan").text(parsedStr);
 						$("#currentStep").text(currentStep+1);
+						$("#step").css("padding-top",($("#step").height()-$("#stepSpan").height())/2 + "px");
 					}
 				}
 
@@ -331,8 +332,9 @@
 						currentStep++;
 						showTimer();
 						var parsedStr = parseingredientstr(steps[currentStep].step);
-						$("#step").text(parsedStr);
+						$("#stepSpan").text(parsedStr);
 						$("#currentStep").text(currentStep+1);
+						$("#step").css("padding-top",($("#step").height()-$("#stepSpan").height())/2 + "px");
 					}
 				}
 
@@ -542,6 +544,8 @@
 			</p>
 		</div>
 		<div id="step">
+			<span id="stepSpan">
+			</span>
 		</div>
 		<div id="ingredients">
 			<p align="center">
@@ -566,11 +570,35 @@
 		</div>
 		<div id="timer">
 			<div id="timerNumbersContainer">
-				<span id="timerHours"></span>
-				<span class="timerColon">:</span>
-				<span id="timerMinutes"></span>
-				<span class="timerColon">:</span>
-				<span id="timerSeconds"></span>
+				<div class="timerNumber">
+					<a class="btn timerNumberTop" onclick="mainNS.prevStep()">
+						<i class="icon-angle-up icon-1x pull-left"></i>
+					</a><br>
+					<span id="timerHours"></span><br>
+					<a class="btn timerNumberBottom" onclick="mainNS.prevStep()">
+						<i class="icon-angle-down icon-1x pull-left"></i>
+					</a>
+				</div>
+				<div class="timerColon">:</div>
+				<div class="timerNumber">
+					<a class="btn timerNumberTop" onclick="mainNS.prevStep()">
+						<i class="icon-angle-up icon-1x pull-left"></i>
+					</a><br>
+					<span id="timerMinutes"></span><br>
+					<a class="btn timerNumberBottom" onclick="mainNS.prevStep()">
+						<i class="icon-angle-down icon-1x pull-left"></i>
+					</a>
+				</div>
+				<div class="timerColon">:</div>
+				<div class="timerNumber">
+					<a class="btn timerNumberTop" onclick="mainNS.prevStep()">
+						<i class="icon-angle-up icon-1x pull-left"></i>
+					</a><br>
+					<span id="timerSeconds"></span><br>
+					<a class="btn timerNumberBottom" onclick="mainNS.prevStep()">
+						<i class="icon-angle-down icon-1x pull-left"></i>
+					</a>
+				</div>
 				<input id="timerStartButton" type="button" value="Start" onclick="mainNS.startTimer()" />
 			</div>
 			<div id="timerProgressContainer">

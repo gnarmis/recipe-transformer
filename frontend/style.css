@@ -67,6 +67,7 @@ span.highlighted {
 	padding: 20px 10px 10px 10px;
 
 	font-size: 36px;
+	text-align: center;
 	line-height: 40px;
 	overflow: scroll;
 }
@@ -97,9 +98,9 @@ span.highlighted {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	height: 40px;
+	height: 60px;
 	border-top: 1px solid black;
-	padding: 10px;
+	padding: 0 10px 0 10px;
 	display: none;
 	color:#FFFFFF;
 
@@ -118,11 +119,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed7e5a', end
 #timerNumbersContainer{
 	width: 20%;
 	float: left;
-	padding-top: 5px;
 }
 
-span.timerColon{
+div.timerColon{
 	font-size: 200%;
+	display: inline-block;
+	position: relative;
+	top: -20px;
 }
 
 #timerHours {
@@ -139,7 +142,6 @@ span.timerColon{
 
 #timerStartButton {
 	margin-left: 10px;
-	margin-bottom: 12px;
 }
 
 #timerProgressContainer{
@@ -157,4 +159,21 @@ span.timerColon{
 
 div.timerDone {
 	color: #FF0000;
+}
+
+div.timerNumber {
+	display: inline-block;
+	text-align: center;
+}
+
+a.timerNumberTop{
+	height: 8px;
+	padding-top: 0px;
+	margin-bottom: 4px;
+}
+
+a.timerNumberBottom{
+	height: 8px;
+	padding-top: 0px;
+	margin-top: 4px;
 }
