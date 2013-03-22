@@ -1,0 +1,160 @@
+#input {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #000000;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 5;
+}
+
+#ingredientsInput {
+	width: 40%;
+	height: 100%;
+	margin-right: 20px;
+}
+
+#stepsInput {
+	width: 40%;
+	height: 100%;
+	margin-left: 20px;
+}
+
+
+
+
+
+#ingredients {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 200px;
+	bottom: 60px;
+	border-right: 1px solid black;
+	padding: 5px 5px 0px 5px;
+	background-color: #b4e391;
+	overflow: scroll;
+}
+
+
+#toggle {
+	
+}
+
+#ingredientsWell {
+	background-color: #FFFFFF;
+}
+
+span.ingredient {
+	display: block;
+}
+
+span.highlighted {
+	font-weight: bold;
+}
+
+
+
+#step {
+	position: absolute;
+	top: 0;
+	left: 210px;
+	right: 0;
+	bottom: 60px;
+	padding: 20px 10px 10px 10px;
+
+	font-size: 36px;
+	line-height: 40px;
+	overflow: scroll;
+}
+
+#fwdBackButtons {
+	position: absolute;
+	right: 20px;
+	bottom: 70px;
+}
+
+#backButton {
+	display: inline-block;
+	width: 15px;
+	height: 45px;
+	border-radius: 3px;
+}
+
+#fwdButton {
+	display: inline-block;
+	width: 15px;
+	height: 45px;
+	border-radius: 3px;
+}
+
+
+#timer {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 40px;
+	border-top: 1px solid black;
+	padding: 10px;
+	display: none;
+	color:#FFFFFF;
+
+	background: rgb(237,126,90); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(237,126,90,1) 0%, rgba(140,51,16,1) 50%, rgba(117,34,1,1) 51%, rgba(191,110,78,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,126,90,1)), color-stop(50%,rgba(140,51,16,1)), color-stop(51%,rgba(117,34,1,1)), color-stop(100%,rgba(191,110,78,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(237,126,90,1) 0%,rgba(140,51,16,1) 50%,rgba(117,34,1,1) 51%,rgba(191,110,78,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(237,126,90,1) 0%,rgba(140,51,16,1) 50%,rgba(117,34,1,1) 51%,rgba(191,110,78,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(237,126,90,1) 0%,rgba(140,51,16,1) 50%,rgba(117,34,1,1) 51%,rgba(191,110,78,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(237,126,90,1) 0%,rgba(140,51,16,1) 50%,rgba(117,34,1,1) 51%,rgba(191,110,78,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed7e5a', endColorstr='#bf6e4e',GradientType=0 ); /* IE6-9 */
+
+
+}
+
+#timerNumbersContainer{
+	width: 20%;
+	float: left;
+	padding-top: 5px;
+}
+
+span.timerColon{
+	font-size: 200%;
+}
+
+#timerHours {
+	font-size: 250%;
+}
+
+#timerMinutes {
+	font-size: 250%;
+}
+
+#timerSeconds {
+	font-size: 200%;
+}
+
+#timerStartButton {
+	margin-left: 10px;
+	margin-bottom: 12px;
+}
+
+#timerProgressContainer{
+	width: 80%;
+	float: left;
+}
+
+#timerProgress {
+	margin: 10px 0 10px 0;
+}
+
+#timerProgressBar {
+	width: 0;
+}
+
+div.timerDone {
+	color: #FF0000;
+}

@@ -1,0 +1,583 @@
+<HTML>
+	<HEAD>
+	    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	    <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet" type="text/css">
+
+	    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    	<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			function MainNS(){
+				var ingredients = new Array();
+				var steps = new Array();
+				var currentStep = -1;
+				var currentTimer = null;
+				var currentTimerMax = null;
+				var currentTimerMaxTotal = 0;
+				var currentTimerStartTimestamp = null;
+				var currentTimerIntervalHandle = null;
+
+				var showingTransformed = false;
+
+				this.unTransformedJSON = {
+					  "steps": [
+					    {
+					      "step": "test1 bring a large pot of", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "1"
+					      }
+					    }, 
+					    {
+					      "step": "lightly salted water to boil.", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "0"
+					      }
+					    }, 
+					    {
+					      "step": "add %INGR0%, and", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "0"
+					      }
+					    }, 
+					    {
+					      "step": "cook until al dente, about 8 to 10 minutes. drain, and set aside.warm 3 tablespoons %INGR1% in a large skillet over medium-high heat.", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "8 to 10"
+					      }
+					    }, 
+					    {
+					      "step": "stir in %INGR2%, and season with salt, %INGR3%, and %INGR6% powder.", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "0"
+					      }
+					    }, 
+					    {
+					      "step": "cook until %INGR2% is cooked through and browned, about 5 minutes.", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "5"
+					      }
+					    }, 
+					    {
+					      "step": "remove %INGR2% to paper towels.pour %INGR2% broth into the skillet.", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "0"
+					      }
+					    }, 
+					    {
+					      "step": "then stir in %INGR5%, %INGR6%, and a pinch more %INGR6% powder, salt, and %INGR3%.", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "0"
+					      }
+					    }
+					  ], 
+					  "ingredients": [
+					    {
+					      "full_sentence": "1 16 ounce package dried penne pasta", 
+					      "name": "pastas", 
+					      "number": "1 16", 
+					      "measurement": "ounce", 
+					      "adj": "", 
+					      "prep": ""
+					    }, 
+					    {
+					      "full_sentence": "5 tablespoons olive oil divided", 
+					      "name": "olive oils", 
+					      "number": "5", 
+					      "measurement": "tablespoons", 
+					      "adj": "", 
+					      "prep": "divided"
+					    }, 
+					    {
+					      "full_sentence": "2 skinless boneless chicken breast halves  cut into cubes", 
+					      "name": "chickens", 
+					      "number": "2", 
+					      "measurement": "", 
+					      "adj": "skinless boneless ", 
+					      "prep": "halves cut"
+					    }, 
+					    {
+					      "full_sentence": "salt and pepper to taste", 
+					      "name": "peppers", 
+					      "number": "", 
+					      "measurement": "", 
+					      "adj": "", 
+					      "prep": ""
+					    }, 
+					    {
+					      "full_sentence": "garlic powder to taste", 
+					      "name": "", 
+					      "number": "", 
+					      "measurement": "", 
+					      "adj": "", 
+					      "prep": ""
+					    }, 
+					    {
+					      "full_sentence": "12 cup lowsodium chicken broth", 
+					      "name": "chicken broth", 
+					      "number": "12", 
+					      "measurement": "cup", 
+					      "adj": "", 
+					      "prep": ""
+					    }, 
+					    {
+					      "full_sentence": "1 bunch slender asparagus spears trimmed cut on diagonal into 1inch pieces", 
+					      "name": "asparaguses", 
+					      "number": "1", 
+					      "measurement": "", 
+					      "adj": "slender diagonal ", 
+					      "prep": "cut"
+					    }, 
+					    {
+					      "full_sentence": "1 clove garlic thinly sliced", 
+					      "name": "garlics", 
+					      "number": "1", 
+					      "measurement": "clove", 
+					      "adj": "", 
+					      "prep": "thinly sliced"
+					    }, 
+					    {
+					      "full_sentence": "14 cup parmesan cheese", 
+					      "name": "parmesan cheeses", 
+					      "number": "14", 
+					      "measurement": "cup", 
+					      "adj": "", 
+					      "prep": ""
+					    }
+					  ]
+					}
+
+					this.transformedJSON = {
+					  "steps": [
+					    {
+					      "step": "test2", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "1"
+					      }
+					    }, 
+					    {
+					      "step": "cover, and steam until the %INGR5% is", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "0"
+					      }
+					    }, 
+					    {
+					      "step": "just tender, about 5 to 10 minutes. return %INGR2% to the skillet, and warm through.stir %INGR2% mixture into %INGR0%, and", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "5 to 10"
+					      }
+					    }, 
+					    {
+					      "step": "mix well.", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "0"
+					      }
+					    }, 
+					    {
+					      "step": "let sit about 5 minutes. drizzle with 2 tablespoons %INGR1%,", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "5"
+					      }
+					    }, 
+					    {
+					      "step": "stir again, then sprinkle with %INGR7%.", 
+					      "timeString": {
+					        "seconds": "0", 
+					        "hours": "0", 
+					        "minutes": "0"
+					      }
+					    }
+					  ], 
+					  "ingredients": [
+					    {
+					      "full_sentence": "1 16 ounce package dried test 2", 
+					      "name": "pastas", 
+					      "number": "1 16", 
+					      "measurement": "ounce", 
+					      "adj": "", 
+					      "prep": ""
+					    }, 
+					    {
+					      "full_sentence": "5 tablespoons olive oil divided", 
+					      "name": "olive oils", 
+					      "number": "5", 
+					      "measurement": "tablespoons", 
+					      "adj": "", 
+					      "prep": "divided"
+					    }, 
+					    {
+					      "full_sentence": "2 skinless boneless chicken breast halves  cut into cubes", 
+					      "name": "chickens", 
+					      "number": "2", 
+					      "measurement": "", 
+					      "adj": "skinless boneless ", 
+					      "prep": "halves cut"
+					    }, 
+					    {
+					      "full_sentence": "salt and pepper to taste", 
+					      "name": "peppers", 
+					      "number": "", 
+					      "measurement": "", 
+					      "adj": "", 
+					      "prep": ""
+					    }, 
+					    {
+					      "full_sentence": "garlic powder to taste", 
+					      "name": "", 
+					      "number": "", 
+					      "measurement": "", 
+					      "adj": "", 
+					      "prep": ""
+					    }, 
+					    {
+					      "full_sentence": "12 cup lowsodium chicken broth", 
+					      "name": "chicken broth", 
+					      "number": "12", 
+					      "measurement": "cup", 
+					      "adj": "", 
+					      "prep": ""
+					    }, 
+					    {
+					      "full_sentence": "1 bunch slender asparagus spears trimmed cut on diagonal into 1inch pieces", 
+					      "name": "asparaguses", 
+					      "number": "1", 
+					      "measurement": "", 
+					      "adj": "slender diagonal ", 
+					      "prep": "cut"
+					    }, 
+					    {
+					      "full_sentence": "1 clove garlic thinly sliced", 
+					      "name": "garlics", 
+					      "number": "1", 
+					      "measurement": "clove", 
+					      "adj": "", 
+					      "prep": "thinly sliced"
+					    }, 
+					    {
+					      "full_sentence": "14 cup parmesan cheese", 
+					      "name": "parmesan cheeses", 
+					      "number": "14", 
+					      "measurement": "cup", 
+					      "adj": "", 
+					      "prep": ""
+					    }
+					  ]
+					}
+
+				var addIngredient = function(ingredient){
+					ingredients.push(ingredient);
+					$("#ingredientsUl").append(
+						$("<li></li>").append(
+							$("<a href='#'></a>")
+							.append(ingredient.full_sentence)
+						)
+						.addClass("ingredient")
+					)
+				}
+
+				var addStep = function(step){
+					steps.push(step);
+				}
+
+				var parseJSON = function(data){
+					ingredients = new Array();
+					steps = new Array();
+					$("#ingredientsUl").empty();
+					for(var i=0;i<data.ingredients.length;i++){
+						addIngredient(data.ingredients[i]);
+					}
+					for(var i=0;i<data.steps.length;i++){
+						addStep(data.steps[i]);
+					}
+				}
+
+				this.prevStep = function(){
+					if(currentStep > 0){
+						currentStep--;
+						showTimer();
+						var parsedStr = parseingredientstr(steps[currentStep].step);
+						$("#step").text(parsedStr);
+						$("#currentStep").text(currentStep+1);
+					}
+				}
+
+				this.nextStep = function(){
+					if(currentStep < steps.length-1){
+						currentStep++;
+						showTimer();
+						var parsedStr = parseingredientstr(steps[currentStep].step);
+						$("#step").text(parsedStr);
+						$("#currentStep").text(currentStep+1);
+					}
+				}
+
+				var showTimer = function(){
+					currentTimerStartTimestamp = null;
+					if(steps[currentStep].timeString.seconds != null){
+						if(isNaN(Number(steps[currentStep].timeString.hours))){
+							if(steps[currentStep].timeString.hours.indexOf("to") > 0){
+								var patt = /[0-9]+/g;
+								var numbers = steps[currentStep].timeString.hours.match(patt);
+								if(numbers.length >= 2){
+									steps[currentStep].timeString.hours = Math.max(Number(numbers[0]),Number(numbers[1]));
+								} else {
+									steps[currentStep].timeString.hours = 0;
+								}
+							} else {
+								steps[currentStep].timeString.hours = 0;
+							}
+						}
+
+						if(isNaN(Number(steps[currentStep].timeString.minutes))){
+							if(steps[currentStep].timeString.minutes.indexOf("to") > 0){
+								var patt = /[0-9]+/g;
+								var numbers = steps[currentStep].timeString.minutes.match(patt);
+								if(numbers.length >= 2){
+									steps[currentStep].timeString.minutes = Math.max(Number(numbers[0]),Number(numbers[1]));
+								} else {
+									steps[currentStep].timeString.minutes = 0;
+								}
+							} else {
+								steps[currentStep].timeString.minutes = 0;
+							}
+						}
+
+						if(isNaN(Number(steps[currentStep].timeString.seconds))){
+							if(steps[currentStep].timeString.seconds.indexOf("to") > 0){
+								var patt = /[0-9]+/g;
+								var numbers = steps[currentStep].timeString.seconds.match(patt);
+								if(numbers.length >= 2){
+									steps[currentStep].timeString.seconds = Math.max(Number(numbers[0]),Number(numbers[1]));
+								} else {
+									steps[currentStep].timeString.seconds = 0;
+								}
+							} else {
+								steps[currentStep].timeString.seconds = 0;
+							}
+						}
+
+
+						currentTimerMax = steps[currentStep].timeString;
+
+						$("#timer").removeClass("timerDone");
+						$("#ingredients").css("bottom","60px");
+						$("#step").css("bottom","60px");
+						$("#timer").show();
+					} else {
+						currentTimerMax = {
+							hours: 0,
+							minutes: 0,
+							seconds: 0
+						};
+
+						$("#ingredients").css("bottom","0");
+						$("#step").css("bottom","0");
+						$("#timer").hide();
+					}
+					mainNS.updateTimer();
+				}
+
+				var parseingredientstr = function(str){
+					//Find ingredient tags in string and highlight them
+					//in the ingredient list.
+					$("#ingredientsUl").children().removeClass("active");
+
+					var patt = /%INGR[0-9]+%/;
+					var strParsed = "";
+					var strUnparsed = str;
+
+					var matchIndex = strUnparsed.search(patt);
+					while(matchIndex != -1){
+						match = strUnparsed.match(patt)[0];
+						ingrIndex = Number(match.substring(5,match.length-1));
+						ingrName = ingredients[ingrIndex].name;
+						$("#ingredientsUl .ingredient:nth-child("+(ingrIndex+1)+")").addClass("active");
+
+						strUnparsed = strUnparsed.replace(patt,ingrName);
+						strParsed += strUnparsed.substring(0,matchIndex+match.length);
+						strUnparsed = strUnparsed.substring(matchIndex+match.length);
+
+						matchIndex = strUnparsed.search(patt);
+					}
+
+					strParsed += strUnparsed;
+
+					return strParsed;
+				}
+
+				this.go = function(){
+					var ingredientsStr = $("#ingredientsInput").text();
+					var stepsStr = $("#stepsInput").text();
+					/*
+					//Get untransformed JSON
+					$.get("http://localhost:5000/RecipeParser/"+ingredientsStr+"/"+stepsStr+"/",
+						function(data){
+							mainNS.unTransformedJSON = data;
+						}
+					);
+
+					//Get transformed JSON
+					$.get("http://localhost:5000/RecipeParser/"+ingredientsStr+"/"+stepsStr+"/",
+						function(data){
+							mainNS.transformedJSON = data;
+						}
+					);
+
+					*/
+					mainNS.showUnTransformed();
+					$("#input").hide();
+				}
+
+				this.toggleTransformed = function(){
+					currentStep = -1;
+					if(showingTransformed){
+						showUnTransformed();
+					} else {
+						showTransformed();
+					}
+				}
+
+				this.showTransformed = function(){
+					currentStep = -1;
+					parseJSON(mainNS.transformedJSON);
+					$("#stepsMax").text(mainNS.transformedJSON.steps.length);
+					mainNS.nextStep();
+					showingTransformed = true;
+				}
+
+				this.showUnTransformed = function(){
+					currentStep = -1;
+					parseJSON(mainNS.unTransformedJSON);
+					$("#stepsMax").text(mainNS.unTransformedJSON.steps.length);
+					mainNS.nextStep();
+					showingTransformed = false;
+				}
+
+				this.onLoad = function(){
+				}
+
+				this.startTimer = function(){
+					currentTimerMaxTotal = currentTimerMax.hours * 3600000 + currentTimerMax.minutes * 60000 + currentTimerMax.seconds * 1000;
+					currentTimerStartTimestamp = new Date().getTime();
+					currentTimer = currentTimerMax;
+					if(currentTimerIntervalHandle!=null) clearInterval(currentTimerIntervalHandle);
+					currentTimerIntervalHandle = setInterval(function(){mainNS.updateTimer()},50);
+				}
+
+				this.updateTimer = function(){
+					var hours;
+					var minutes;
+					var seconds;
+
+					var elapsed = 0;
+
+					if(currentTimerStartTimestamp != null){
+						elapsed = new Date().getTime() - currentTimerStartTimestamp;
+						var remaining = currentTimerMaxTotal - elapsed;
+						hours = Math.floor(remaining/3600000);
+						minutes = Math.floor((remaining % 3600000)/60000);
+						seconds = Math.floor(((remaining % 3600000) % 60000)/1000);
+					} else {
+						hours = currentTimerMax.hours;
+						minutes = currentTimerMax.minutes;
+						seconds = currentTimerMax.seconds;
+					}
+
+					$("#timerProgressBar").width((100*elapsed/currentTimerMaxTotal)+"%");
+
+					if(hours < 0 || minutes < 0 || seconds < 0){
+						hours = 0;
+						minutes = 0;
+						seconds = 0;
+						$("#timer").addClass("timerDone");
+					}
+
+					minutes = minutes.toString();
+					seconds = seconds.toString();
+
+					if(minutes.length < 2) minutes = "0"+minutes;
+					if(seconds.length < 2) seconds = "0"+seconds;
+
+					$("#timerHours").text(hours);
+					$("#timerMinutes").text(minutes);
+					$("#timerSeconds").text(seconds);
+				}
+			}
+			mainNS = new MainNS();
+		</script>
+	</HEAD>
+	<BODY onload="mainNS.onLoad()">
+		<div id="input">
+			<p align="center">
+				<textarea id="ingredientsInput">Paste ingredients here.</textarea>
+				<textarea id="stepsInput">Paste steps here.</textarea>
+			</p>
+			<p align="center">
+				<input id="go" type="button" value="Go" onclick="mainNS.go()"/>
+			</p>
+		</div>
+		<div id="step">
+		</div>
+		<div id="ingredients">
+			<p align="center">
+				<input type="button" value="Original" onclick="mainNS.showUnTransformed()"/>
+				<input type="button" value="Transformed" onclick="mainNS.showTransformed()"/>
+			</p>
+			<div id="ingredientsWell" class="well">
+				<ul class="nav nav-list" id="ingredientsUl">
+				</ul>
+			</div>
+		</div>
+		<div id="test" style="position:absolute;width:100px;height:100px;top:0px;right:0px;">
+		</div>
+		<div id="fwdBackButtons">
+			<a id="backButton" class="btn" onclick="mainNS.prevStep()">
+				<i class="icon-angle-left icon-3x pull-left"></i>
+			</a>
+			<h3 style="display:inline-block"><span id="currentStep">0</span> of <span id="stepsMax">0</span></h3>
+			<a id="fwdButton" class="btn" onclick="mainNS.nextStep()">
+				<i class="icon-angle-right icon-3x pull-left"></i>
+			</a>
+		</div>
+		<div id="timer">
+			<div id="timerNumbersContainer">
+				<span id="timerHours"></span>
+				<span class="timerColon">:</span>
+				<span id="timerMinutes"></span>
+				<span class="timerColon">:</span>
+				<span id="timerSeconds"></span>
+				<input id="timerStartButton" type="button" value="Start" onclick="mainNS.startTimer()" />
+			</div>
+			<div id="timerProgressContainer">
+				<div id="timerProgress" class="progress">
+					<div id="timerProgressBar" class="bar"></div>
+				</div>
+			</div>
+		</div>
+	</BODY>
+</HTML>
