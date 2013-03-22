@@ -18,7 +18,7 @@
   (try
     {:status  200
      :headers {"Content-Type" "application/json"}
-     :body    (json/write-str {:results (db/food-to-group (codec/url-decode q))})}
+     :body    (json/write-str {:results (db/food-search-query (codec/url-decode q))})}
     (catch Exception e
       {:status  409
        :headers {"Content-Type" "application/json"}
@@ -26,8 +26,8 @@
 
 (def app-routes
   "Vector of forms that define how the routes of the app behave."
-  [(GET "/food/search/:q" [q] (food-search q))
-   (route/not-found "Chef.food")])
+  [(GET "/food/:q" [q] (food-search q))
+   (route/not-found "Chef Endpoints: GET /food/:q")])
 
 
 (def app

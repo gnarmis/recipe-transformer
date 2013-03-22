@@ -10,7 +10,7 @@ Exploring various food data. Specifically USDA's FNDDS5 and SR25.
 
 ## API
 
-- GET `/food/search/:q` -> JSON response containing foods and their food groups
+- GET `/food/:q` -> JSON response containing foods and their food groups
 
 ## Documentation
 

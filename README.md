@@ -7,7 +7,7 @@ An explorative look at recipe transformation
 
 ### API Endpoints
 
-- GET `http://localhost:3000/food/search/:q` -> JSON response containing results, which have both foods and their groups (such as dairy)
+- GET `http://localhost:3000/food/:q` -> JSON response containing results, which have both foods and their groups (such as dairy)
 
 For more info, check out Chef/README.md
 
@@ -28,7 +28,7 @@ The parser is called RecipeParser. If you navigate to the `SethRecipeParser` fol
 
 Note that for the ingredient and steps lists, the parser assumes that there is a new-line character in-between each ingredient (fairly common in such lists). 
 
-- Output:
+Output:
 ```json
 {"steps":[
      {
