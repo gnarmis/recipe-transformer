@@ -35,15 +35,26 @@
     (wrap-response (json/write-str {:results (db/health-candidates-query (codec/url-decode q))})
                    202)
     (catch Exception e
-      (wrap-response (json/write-str {:error "Something went wrong"
-                                      :exception (str e)})
+      (wrap-response (json/write-str {:error "Something went wrong"})
                      409))))
+
+(defn transform-handler
+  "Takes in a curated JSON structure and replaces some of the ingredients."
+  [recipe]
+  (try
+    (wrap-response (json/write-str (db/transform-query (-> recipe first second (json/read-str :key-fn keyword))))
+                   202)
+    ;(catch Exception e
+    ;  (wrap-response (json/write-str {:error "Something went wrong"})
+    ;                 409))
+    ))
 
 
 (def app-routes
   "Vector of forms that define how the routes of the app behave."
   [(GET "/food/:q" [q] (food-search q))
    (GET "/food-group/:q" [q] (food-group-search q))
+   (POST "/transform" {params :params} (transform-handler params))
    (route/not-found "Chef Endpoints: GET /food/:q, GET /food-group/:q")])
 
 

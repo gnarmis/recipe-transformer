@@ -5,7 +5,11 @@
             [dk.ative.docjure.spreadsheet :as doc]
             [clojure.java.io  :as io]
             [clojure.string   :as s]
-            [clojure.java.jdbc :as sql]))
+            [clojure.java.jdbc :as sql]
+            (bigml.sampling [simple :as simple]
+                            [reservoir :as reservoir]
+                            [stream :as stream]))
+  (:use [inflections.core]))
 
 
 ; DB Definitions...
@@ -86,6 +90,7 @@
   (for [r results]
     {:name (:long_desc r)
      :group (:fdgrp_desc r)
+     :NDB_No (:ndb_no r)
      :nutrition {(keyword "energy_(kcal)") ((keyword "energ_kcal") r)
                  (keyword "carbohydrate_(g)") ((keyword "carbohydrt_(g)") r)
                  (keyword "protein_(g)") ((keyword "protein_(g)") r)
@@ -103,7 +108,7 @@
                              (keyword "quantity-weight_(g)") ((keyword "gmwt_2") r)}]
                  }}))
 
-;(food-search-query "onions")
+;(-> (food-search-query "bacon") first)
 
 
 (defn health-candidates-query
@@ -113,7 +118,7 @@
               from ABBREV
               join FOOD_DES on ABBREV.NDB_No = FOOD_DES.NDB_No
               join FD_GROUP on FOOD_DES.FdGrp_Cd = FD_GROUP.FdGrp_CD
-              where FD_GROUP.FdGrp_Desc like '"
+              where FD_GROUP.FdGrp_Desc LIKE '"
               q
               "'
               order by ABBREV.`Energ_Kcal` ASC
@@ -122,10 +127,65 @@
        process-food-query))
 
 
+(defn try-query-with-inflections
+  "Try plural or singular. Expects plural."
+  [ingred-name]
+  (let [q (food-search-query ingred-name)]
+    (cond
+     (= (count q) 0) (-> ingred-name singular food-search-query)
+     :else q)))
+
+
+(defn upgrade-ingredients
+  "Search and add extra info for each ingredient."
+  [ingredients]
+  ;(-> ingredients first :name singular food-search-query println)
+  ;(-> (try-query-with-inflections (:name (first ingredients))) first println)
+  (for [ingred ingredients]
+    (let [result (-> (try-query-with-inflections (:name ingred))
+                     first)]
+      (-> ingred
+          (assoc :best-match-NDB_No (:NDB_No result))
+          (assoc :best-match-description (:name result))
+          (assoc :best-match-group (:group result))
+          (assoc :nutrition (:nutrition result))))))
+
+
+(defn replace-ingredient
+  "replaces ingredient"
+  [ingreds string-to-replace]
+  (first (take 1 (simple/sample ingreds))))
+
+(defn replace-ingredients
+  "Replace specific ingredients as they appear."
+  [steps ingreds]
+  (for [step steps]
+    (let [replacement (->> (re-seq #"%[A-Z0-9]+%" (:step step)) 
+                           first 
+                           (replace-ingredient ingreds))]
+      (assoc 
+        step
+        :step 
+        (s/replace (:step step) #"%[A-Z0-9]+%" (:name replacement))))))
 
 
 
-(defn add-fulltext [db table-name field-name]
+(defn transform-query
+  "Transform recipe by replacing some ingredients"
+  [recipe]
+  ;(println (-> recipe :ingredients first :name))
+  (let [upgraded-ingreds (upgrade-ingredients (:ingredients recipe))]
+    {:ingredients upgraded-ingreds
+     :steps (replace-ingredients (:steps recipe) upgraded-ingreds)}))
+
+
+
+
+
+
+(defn add-fulltext
+  "Add fulltext search using ALTER TABLE SQL queries."
+  [db table-name field-name]
   (sql/with-connection db
    (sql/do-commands (str "ALTER TABLE "
                          table-name
@@ -134,7 +194,12 @@
                          field-name
                          ")"))))
 
-;(add-fulltext SR25-db "FOOD_DES" "Long_Desc")
+(defn prepare-SR25-db
+  "Makes sure the DB has the right alterations done to it."
+  []
+  (add-fulltext SR25-db "FOOD_DES" "Long_Desc")
+  (add-fulltext SR25-db "FD_GROUP" "FdGrp_Desc"))
+
 
 ; Spreadsheet Reading
 

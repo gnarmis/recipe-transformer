@@ -13,6 +13,8 @@
                  [ring-server "0.2.8"]
                  [ring/ring-codec "1.0.0"]
                  [org.clojure/data.json "0.2.1"]
+                 [inflections "0.8.0"]
+                 [bigml/sampling "2.1.0"]
                  [korma "0.3.0-RC4"]
                  [log4j "1.2.15" :exclusions [javax.mail/mail
                                               javax.jms/jms
