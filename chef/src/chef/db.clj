@@ -118,9 +118,9 @@
               from ABBREV
               join FOOD_DES on ABBREV.NDB_No = FOOD_DES.NDB_No
               join FD_GROUP on FOOD_DES.FdGrp_Cd = FD_GROUP.FdGrp_CD
-              where FD_GROUP.FdGrp_Desc LIKE '"
+              where MATCH(FD_GROUP.FdGrp_Desc) AGAINST ('"
               q
-              "'
+              "')
               order by ABBREV.`Energ_Kcal` ASC
               limit 10")
               SR25-db)
